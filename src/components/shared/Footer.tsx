@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { BallLogoIcon } from './icons'
 import './Footer.css'
 
 // Shared Footer shown at the bottom of every Storefront page: shop
@@ -12,7 +13,10 @@ function Footer() {
     <footer className="app-footer">
       <div className="app-footer-content">
         <div className="app-footer-section app-footer-brand">
-          <p className="app-footer-title">LananhSport</p>
+          <Link to="/" className="app-footer-brand-link">
+            <BallLogoIcon />
+            <span className="app-footer-title">LananhSport</span>
+          </Link>
           <p className="app-footer-text">
             Chuyên cung cấp dụng cụ và trang phục thể thao chất lượng: bóng, giày, vợt, quần áo tập luyện cho mọi
             môn thể thao.

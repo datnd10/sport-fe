@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Footer, Header, NavLink, ProductCard } from '../../components/shared'
+import { CategoryChipsSkeleton, Footer, Header, NavLink, ProductCard, ProductGridSkeleton, Slideshow } from '../../components/shared'
 import categoryService from '../../services/categoryService'
 import { getErrorMessage } from '../../services/apiError'
 import productService from '../../services/productService'
@@ -61,15 +61,17 @@ function HomePage() {
       <Header />
 
       <main className="home-page-content">
-        {loadState === 'loading' ? <p className="home-page-status">Đang tải...</p> : null}
+        <Slideshow />
 
         {loadState === 'error' ? <p className="home-page-status home-page-status-error">{errorMessage}</p> : null}
 
-        {loadState === 'success' ? (
+        {loadState !== 'error' ? (
           <>
             <section className="home-section" aria-labelledby="categories-heading">
               <h2 id="categories-heading">Danh mục</h2>
-              {categories.length === 0 ? (
+              {loadState === 'loading' ? (
+                <CategoryChipsSkeleton />
+              ) : categories.length === 0 ? (
                 <p className="home-page-empty">Chưa có danh mục nào.</p>
               ) : (
                 <nav className="category-nav">
@@ -84,7 +86,9 @@ function HomePage() {
 
             <section className="home-section" aria-labelledby="featured-heading">
               <h2 id="featured-heading">Sản phẩm nổi bật</h2>
-              {featuredProducts.length === 0 ? (
+              {loadState === 'loading' ? (
+                <ProductGridSkeleton count={FEATURED_PRODUCT_LIMIT} />
+              ) : featuredProducts.length === 0 ? (
                 <p className="home-page-empty">Chưa có sản phẩm nào.</p>
               ) : (
                 <div className="product-grid">

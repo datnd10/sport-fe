@@ -2,6 +2,8 @@ export { default as Button } from './Button'
 export type { ButtonVariant } from './Button'
 export { default as Header } from './Header'
 export { default as Footer } from './Footer'
+export { default as Slideshow } from './Slideshow'
+export type { SlideshowImage } from './Slideshow'
 export { default as NavLink } from './NavLink'
 export { default as Badge } from './Badge'
 export type { BadgeVariant } from './Badge'
@@ -21,6 +23,7 @@ export { default as CurrencyInput } from './CurrencyInput'
 export type { CurrencyInputProps } from './CurrencyInput'
 export { default as Modal } from './Modal'
 export type { ModalProps } from './Modal'
+export { CategoryChipsSkeleton, ProductGridSkeleton } from './Skeleton'
 export {
   DashboardIcon,
   CategoryIcon,

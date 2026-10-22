@@ -13,9 +13,16 @@ type SearchBarProps = {
   /** Called with the trimmed keyword when the search is submitted. */
   onSearch: (keyword: string) => void
   placeholder?: string
+  /** Extra class appended to the root <form>, e.g. to restyle for the header. */
+  className?: string
 }
 
-function SearchBar({ initialKeyword = '', onSearch, placeholder = 'Tìm kiếm sản phẩm...' }: SearchBarProps) {
+function SearchBar({
+  initialKeyword = '',
+  onSearch,
+  placeholder = 'Tìm kiếm sản phẩm...',
+  className,
+}: SearchBarProps) {
   const [keyword, setKeyword] = useState(initialKeyword)
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -24,7 +31,7 @@ function SearchBar({ initialKeyword = '', onSearch, placeholder = 'Tìm kiếm s
   }
 
   return (
-    <form className="search-bar" role="search" onSubmit={handleSubmit}>
+    <form className={['search-bar', className].filter(Boolean).join(' ')} role="search" onSubmit={handleSubmit}>
       <input
         type="search"
         className="search-bar-input"

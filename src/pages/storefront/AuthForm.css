@@ -1,36 +1,168 @@
-/* Shared layout for the Đăng ký (Register) and Đăng nhập (Login) pages.
+/* Shared layout for the ÄÄƒng kÃ½ (Register) and ÄÄƒng nháº­p (Login) pages.
+   Split-screen layout: a branding panel (left) showcasing LananhSport
+   on a brand-gradient background, and the actual form card (right).
+   On small screens the branding panel collapses into a compact top
+   banner so the form stays the primary focus.
    References design tokens from src/styles/tokens.css.
    Requirements: 11.1, 11.2 */
 
 .auth-page {
   flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: calc(100vh - 64px);
+  background-color: var(--color-bg-page);
+}
+
+/* ---------- Left: branding panel ---------- */
+
+.auth-brand {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 3.5rem;
+  color: #ffffff;
+  background: radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.14), transparent 45%),
+    linear-gradient(155deg, var(--color-brand-primary-dark) 0%, var(--color-brand-primary) 55%, var(--color-brand-accent) 100%);
+  overflow: hidden;
+}
+
+.auth-brand::before,
+.auth-brand::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+.auth-brand::before {
+  width: 320px;
+  height: 320px;
+  right: -110px;
+  bottom: -110px;
+}
+
+.auth-brand::after {
+  width: 180px;
+  height: 180px;
+  right: 40px;
+  top: -70px;
+}
+
+.auth-brand-logo {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.auth-brand-logo svg {
+  width: 32px;
+  height: 32px;
+}
+
+.auth-brand-heading {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+}
+
+.auth-brand-heading h2 {
+  margin: 0 0 0.75rem;
+  font-size: 2rem;
+  line-height: 1.25;
+}
+
+.auth-brand-heading p {
+  margin: 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+.auth-brand-highlights {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.auth-brand-highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.auth-brand-highlights svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 0.1em;
+  color: #ffffff;
+}
+
+/* ---------- Right: form side ---------- */
+
+.auth-form-side {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2.5rem 1rem;
-  background: linear-gradient(160deg, var(--color-brand-primary-light) 0%, var(--color-bg-page) 55%);
+  padding: 2.5rem 1.5rem;
 }
 
 .auth-card {
   width: 100%;
   max-width: 420px;
-  background-color: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: 2.25rem 2rem;
-  box-shadow: var(--shadow-card-hover);
+}
+
+.auth-card-brand-mobile {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-brand-primary);
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.auth-card-brand-mobile svg {
+  width: 26px;
+  height: 26px;
 }
 
 .auth-card h1 {
-  margin: 0 0 1.5rem;
-  color: var(--color-brand-primary);
+  margin: 0 0 0.4rem;
+  color: var(--color-text-heading);
   font-size: 1.6rem;
-  text-align: center;
+}
+
+.auth-card-subtitle {
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
+  gap: 1.1rem;
+}
+
+.auth-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1.1rem;
 }
 
@@ -60,6 +192,53 @@
   outline-offset: 1px;
 }
 
+.auth-field input[aria-invalid='true'] {
+  border-color: var(--color-state-error);
+}
+
+/* Password field with an inline show/hide toggle button. */
+.auth-password-wrap {
+  position: relative;
+  display: flex;
+}
+
+.auth-password-wrap input {
+  flex: 1;
+  padding-right: 2.6em;
+}
+
+.auth-password-toggle {
+  position: absolute;
+  right: 0.35em;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.auth-password-toggle:hover {
+  color: var(--color-brand-primary);
+}
+
+.auth-password-toggle:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 1px;
+}
+
+.auth-password-toggle svg {
+  width: 19px;
+  height: 19px;
+}
+
 .auth-field-error {
   color: var(--color-state-error);
   font-size: 0.85rem;
@@ -83,6 +262,19 @@
   margin: 0;
 }
 
+.auth-forgot-link {
+  align-self: flex-end;
+  margin-top: -0.6rem;
+  font-size: 0.85rem;
+  color: var(--color-brand-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-forgot-link:hover {
+  text-decoration: underline;
+}
+
 .auth-card-footer {
   margin-top: 1.5rem;
   font-size: 0.9rem;
@@ -98,4 +290,30 @@
 
 .auth-card-footer a:hover {
   text-decoration: underline;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 860px) {
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-brand {
+    display: none;
+  }
+
+  .auth-card-brand-mobile {
+    display: flex;
+  }
+
+  .auth-form-side {
+    padding: 2rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-form-row {
+    grid-template-columns: 1fr;
+  }
 }

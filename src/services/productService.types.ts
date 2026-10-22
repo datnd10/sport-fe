@@ -25,6 +25,7 @@ export interface ProductResponse {
   basePrice: number
   active: boolean
   variants: ProductVariantResponse[]
+  images: ProductImageResponse[]
 }
 
 export interface ProductSearchResult {

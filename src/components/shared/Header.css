@@ -4,11 +4,6 @@
    Requirements: 6.1, 6.2, 6.5, 11.1, 11.2, 11.3 */
 
 .app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding: 0.85rem 2rem;
   background: linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-primary-dark) 100%);
   color: #fff;
   box-shadow: var(--shadow-header);
@@ -17,23 +12,65 @@
   z-index: 10;
 }
 
+/* Inner content wrapper — same max-width + horizontal padding as
+   .home-page-content and .app-footer-content, so the logo/search/actions
+   line up with the page content and footer below instead of running
+   edge-to-edge. The gradient background stays on .app-header (full width). */
+.app-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.85rem 2rem;
+  box-sizing: border-box;
+}
+
+/* Font size matches .app-footer-title so the "LananhSport" wordmark reads
+   at the same size in the Header and Footer. */
 .app-header-title {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.app-header-title a {
+/* Logo mark (task: đồng bộ logo giữa Header và trang Đăng nhập/Đăng ký,
+   which both use BallLogoIcon as the brand mark). */
+.app-header-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   color: #fff;
   text-decoration: none;
+}
+
+.app-header-brand svg {
+  width: 30px;
+  height: 30px;
+}
+
+/* Shopee-style layout: the keyword search bar sits front and center in
+   the header, between the logo and the right-hand actions, instead of
+   being tucked away in a sidebar on each listing page. */
+.app-header-search {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 640px;
+}
+
+.app-header-search .search-bar-input {
+  background-color: #fff;
 }
 
 .app-header-actions {
   display: flex;
   align-items: center;
   gap: 1.25rem;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .app-header-cart {
@@ -122,17 +159,54 @@
   gap: 0.6rem;
 }
 
+/* Đăng nhập — outlined trên nền header, để phân biệt rõ với nút Đăng ký
+   (nền trắng đặc) bên cạnh. Hover làm rõ cả nền lẫn viền. */
 .app-header-login {
+  background-color: transparent;
+  border-color: rgba(255, 255, 255, 0.6);
   color: #fff;
 }
 
 .app-header-login:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: #fff;
 }
 
-@media (max-width: 720px) {
-  .app-header {
+/* Đăng ký — nền trắng đặc + chữ màu brand, nổi bật hẳn so với nền xanh
+   của header và tách biệt rõ với nút Đăng nhập (outlined, trong suốt).
+   Override btn-secondary's default (xanh nhạt trên xanh đậm == gần như
+   vô hình) với cặp màu tương phản cao. */
+.app-header-register {
+  background-color: #fff;
+  border-color: #fff;
+  color: var(--color-brand-primary-dark);
+}
+
+.app-header-register:hover:not(:disabled) {
+  background-color: var(--color-brand-primary-light);
+  border-color: var(--color-brand-primary-light);
+  color: var(--color-brand-primary-dark);
+}
+
+@media (max-width: 860px) {
+  .app-header-content {
     flex-wrap: wrap;
     padding: 0.75rem 1rem;
+  }
+
+  .app-header-search {
+    order: 3;
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  .app-header-actions {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header-auth-actions {
+    gap: 0.4rem;
   }
 }

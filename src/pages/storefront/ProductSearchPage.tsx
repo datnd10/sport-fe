@@ -6,7 +6,7 @@ import {
   Header,
   NoResults,
   ProductCard,
-  SearchBar,
+  ProductGridSkeleton,
   toProductListParams,
 } from '../../components/shared'
 import type { ProductFilterValues } from '../../components/shared'
@@ -37,13 +37,14 @@ function readFilterValuesFromParams(params: URLSearchParams): ProductFilterValue
   }
 }
 
-// Trang tìm kiếm Sản_Phẩm (Product search page): a keyword SearchBar
-// (Requirement 2.3) placed next to the FilterPanel for price/Danh_Mục/
-// Biến_Thể attribute filters (Requirement 2.6), calling GET /api/products
-// with every condition AND'ed together. When the result set is empty,
-// shows a "no results" message with suggested popular Danh_Mục
-// (Requirement 2.4). Search/filter state is kept in the URL so results
-// are shareable/bookmarkable.
+// Trang tìm kiếm Sản_Phẩm (Product search page): the keyword search itself
+// is entered via the shared Header's SearchBar (Shopee-style, Requirement
+// 2.3), which navigates here with ?keyword=... This page renders the
+// FilterPanel for price/Danh_Mục/Biến_Thể attribute filters (Requirement
+// 2.6), calling GET /api/products with every condition AND'ed together.
+// When the result set is empty, shows a "no results" message with
+// suggested popular Danh_Mục (Requirement 2.4). Search/filter state is
+// kept in the URL so results are shareable/bookmarkable.
 function ProductSearchPage() {
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -127,10 +128,6 @@ function ProductSearchPage() {
     setSearchParams(nextSearchParams)
   }
 
-  function handleSearch(nextKeyword: string) {
-    updateParams(nextKeyword, filterValues)
-  }
-
   function handleFilterChange(nextFilters: ProductFilterValues) {
     updateParams(keyword, nextFilters)
   }
@@ -141,7 +138,6 @@ function ProductSearchPage() {
 
       <main className="product-search-content">
         <aside className="product-search-sidebar">
-          <SearchBar initialKeyword={keyword} onSearch={handleSearch} />
           <FilterPanel categories={categories} value={filterValues} onChange={handleFilterChange} />
         </aside>
 
@@ -150,7 +146,7 @@ function ProductSearchPage() {
             {keyword ? `Kết quả tìm kiếm cho "${keyword}"` : 'Tất cả sản phẩm'}
           </h2>
 
-          {loadState === 'loading' ? <p className="product-search-status">Đang tải...</p> : null}
+          {loadState === 'loading' ? <ProductGridSkeleton /> : null}
 
           {loadState === 'error' ? (
             <p className="product-search-status product-search-status-error">{errorMessage}</p>
