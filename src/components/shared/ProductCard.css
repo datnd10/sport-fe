@@ -23,12 +23,32 @@
 }
 
 .product-card-image {
+  position: relative;
   aspect-ratio: 4 / 3;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--color-brand-primary-light) 0%, #f7fbf4 100%);
   color: var(--color-brand-primary);
+  overflow: hidden;
+}
+
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Placeholder icon shown when the product has no image, or the <img>
+   failed to load (see ProductCard.tsx's onError handler). */
+.product-card-image-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card-image-fallback-hidden {
+  display: none;
 }
 
 .product-card-image svg {

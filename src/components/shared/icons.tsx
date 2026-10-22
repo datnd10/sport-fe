@@ -134,6 +134,28 @@ export function EyeIcon(props: IconProps) {
   )
 }
 
+/** Eye with a slash through it, used to toggle a password field back to hidden. */
+export function EyeOffIcon(props: IconProps) {
+  return (
+    <svg {...baseProps(props)}>
+      <path d="M3 3l18 18" />
+      <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6 0 9.5 7 9.5 7a14.6 14.6 0 0 1-3 3.9" />
+      <path d="M6.2 6.2C4 7.8 2.5 10 2.5 12c0 0 1.8 3.6 5.6 5.7" />
+      <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" />
+    </svg>
+  )
+}
+
+/** Filled checkmark in a circle, used for feature/benefit bullet lists. */
+export function CheckCircleIcon(props: IconProps) {
+  return (
+    <svg {...baseProps(props)}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8.5 12.3l2.3 2.3 4.7-5.2" />
+    </svg>
+  )
+}
+
 export function EditIcon(props: IconProps) {
   return (
     <svg {...baseProps(props)}>

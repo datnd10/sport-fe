@@ -1,0 +1,108 @@
+/* Homepage hero banner slideshow — references design tokens from
+   src/styles/tokens.css. Requirements: 2.1, 11.1, 11.2 */
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  background-color: var(--color-bg-muted);
+}
+
+.slideshow-viewport {
+  position: relative;
+  width: 100%;
+  /* 16:5 banner aspect ratio, scales with viewport width. */
+  aspect-ratio: 16 / 5;
+}
+
+.slideshow-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease;
+}
+
+.slideshow-slide-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.slideshow-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: none;
+  background-color: rgba(26, 36, 32, 0.4);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.slideshow-nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.slideshow-nav:hover {
+  background-color: rgba(26, 36, 32, 0.65);
+}
+
+.slideshow-nav-prev {
+  left: 0.9rem;
+}
+
+.slideshow-nav-next {
+  right: 0.9rem;
+}
+
+.slideshow-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 0.85rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.slideshow-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.slideshow-dot:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.slideshow-dot-active {
+  background-color: #fff;
+  transform: scale(1.2);
+}
+
+@media (max-width: 640px) {
+  .slideshow-viewport {
+    aspect-ratio: 16 / 9;
+  }
+
+  .slideshow-nav {
+    width: 32px;
+    height: 32px;
+  }
+}

@@ -1,0 +1,81 @@
+/* Shared loading skeleton styles — references design tokens from
+   src/styles/tokens.css. Used to reserve roughly the same height as the
+   real content it stands in for (category chips, product cards), so the
+   page doesn't visibly jump/reflow once data finishes loading. */
+
+.skeleton-block {
+  display: block;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(
+    100deg,
+    var(--color-bg-muted) 30%,
+    var(--color-border) 50%,
+    var(--color-bg-muted) 70%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.skeleton-category-chip {
+  width: 96px;
+  height: 36px;
+  border-radius: 999px;
+}
+
+.skeleton-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.skeleton-product-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-surface);
+}
+
+.skeleton-product-card-image {
+  aspect-ratio: 4 / 3;
+  border-radius: 0;
+}
+
+.skeleton-product-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.9rem 1rem 1.1rem;
+}
+
+.skeleton-product-card-line {
+  height: 0.85rem;
+  width: 85%;
+}
+
+.skeleton-product-card-line-short {
+  height: 0.85rem;
+  width: 45%;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-block {
+    animation: none;
+  }
+}

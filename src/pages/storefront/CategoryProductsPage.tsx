@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
   FilterPanel,
   Footer,
   Header,
   NoResults,
   ProductCard,
-  SearchBar,
+  ProductGridSkeleton,
   createEmptyFilterValues,
   toProductListParams,
 } from '../../components/shared'
@@ -25,12 +25,10 @@ type LoadState = 'loading' | 'success' | 'error'
 // Khách_Hàng narrow the category's products further with a price/Biến_Thể
 // attribute FilterPanel (Requirement 2.6) and showing a "no results" state
 // with suggested popular Danh_Mục when the combined filters match nothing
-// (Requirement 2.4). The keyword SearchBar sits next to the FilterPanel in
-// the sidebar so Khách_Hàng can jump to the full cross-category search page
-// (Requirement 2.3).
+// (Requirement 2.4). The keyword SearchBar lives in the shared Header
+// (Shopee-style, Requirement 2.3) instead of this page's sidebar.
 function CategoryProductsPage() {
   const { categoryId } = useParams<{ categoryId: string }>()
-  const navigate = useNavigate()
 
   const [products, setProducts] = useState<ProductResponse[]>([])
   const [allCategories, setAllCategories] = useState<CategoryResponse[]>([])
@@ -90,17 +88,12 @@ function CategoryProductsPage() {
     }
   }, [categoryId, filterValues])
 
-  function handleSearch(keyword: string) {
-    navigate(keyword ? `/search?keyword=${encodeURIComponent(keyword)}` : '/search')
-  }
-
   return (
     <div className="category-products-page">
       <Header />
 
       <main className="category-products-content">
         <aside className="category-products-sidebar">
-          <SearchBar onSearch={handleSearch} />
           <FilterPanel
             categories={allCategories}
             value={filterValues}
@@ -110,7 +103,7 @@ function CategoryProductsPage() {
         </aside>
 
         <section className="category-products-results">
-          {loadState === 'loading' ? <p className="category-products-status">Đang tải...</p> : null}
+          {loadState === 'loading' ? <ProductGridSkeleton /> : null}
 
           {loadState === 'error' ? (
             <p className="category-products-status category-products-status-error">{errorMessage}</p>
