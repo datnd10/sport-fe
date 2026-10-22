@@ -1,0 +1,31 @@
+/* Shared "no results" state — references design tokens from
+   src/styles/tokens.css. Requirements: 2.4, 11.1, 11.2 */
+
+.no-results {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg-surface);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+}
+
+.no-results-message {
+  font-size: 1.05rem;
+  margin: 0 0 1rem;
+  color: var(--color-text-body);
+}
+
+.no-results-suggestions-heading {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text-heading);
+}
+
+.no-results-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}

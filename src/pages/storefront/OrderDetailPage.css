@@ -1,0 +1,199 @@
+/* Trang chi tiết Đơn_Hàng styles — references design tokens from
+   src/styles/tokens.css. Requirements: 5.6, 11.1, 11.2 */
+
+.order-detail-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.order-detail-content {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-sizing: border-box;
+}
+
+.order-detail-status {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2rem 0;
+}
+
+.order-detail-missing {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.order-detail-error {
+  color: var(--color-state-error);
+  background-color: var(--color-state-error-light);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.order-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.order-detail-title {
+  margin: 0;
+  color: var(--color-text-heading);
+}
+
+.order-detail-date {
+  margin: 0.25rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.order-detail-section {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.3rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.order-detail-section h3 {
+  margin: 0;
+  color: var(--color-text-heading);
+  font-size: 1.05rem;
+}
+
+.order-detail-section p {
+  margin: 0;
+  color: var(--color-text-body);
+}
+
+.order-detail-payment-method {
+  font-weight: 600;
+}
+
+.order-detail-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.order-detail-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-body);
+}
+
+.order-detail-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.order-detail-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.order-detail-item-name {
+  font-weight: 600;
+  color: var(--color-text-heading);
+}
+
+.order-detail-item-attributes {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.order-detail-item-quantity {
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.order-detail-item-total {
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  white-space: nowrap;
+}
+
+.order-detail-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.order-detail-totals-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-body);
+}
+
+.order-detail-discount {
+  color: var(--color-brand-primary);
+}
+
+.order-detail-total {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-brand-primary);
+}
+
+.order-detail-bank-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.order-detail-bank-details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.order-detail-bank-details dt {
+  color: var(--color-text-muted);
+}
+
+.order-detail-bank-details dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-text-heading);
+}
+
+.order-detail-actions {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 560px) {
+  .order-detail-item {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 0.3rem;
+  }
+}

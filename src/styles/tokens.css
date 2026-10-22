@@ -1,0 +1,48 @@
+/* Design tokens — Tone_Màu_Chủ_Đạo (primary brand color palette).
+   Shared CSS variables used across both Storefront and Admin UI so that
+   changing the theme only requires editing this single file.
+   See design.md — "Chiến lược nhận diện thương hiệu (Requirement 11)".
+   Requirements: 11.1, 11.2, 11.4 */
+
+:root {
+  /* Xanh lá đậm - header, nút chính */
+  --color-brand-primary: #2e7d32;
+  --color-brand-primary-hover: #276428;
+  --color-brand-primary-dark: #1b5e20;
+  /* Nền nhấn nhẹ */
+  --color-brand-primary-light: #e8f5e9;
+  --color-brand-accent: #43a047;
+
+  /* Ngoại lệ cho trạng thái lỗi/cảnh báo (Requirement 11.4) */
+  --color-state-error: #c62828;
+  --color-state-error-light: #fdecea;
+  --color-state-warning: #f9a825;
+  --color-state-warning-light: #fff8e1;
+  --color-state-success: #2e7d32;
+
+  /* Nền & chữ trung tính dùng chung toàn app (storefront + admin) */
+  --color-bg-page: #f4f7f5;
+  --color-bg-surface: #ffffff;
+  --color-bg-muted: #f0f2f1;
+  --color-text-body: #3c4440;
+  --color-text-muted: #6b7570;
+  --color-text-heading: #1a2420;
+  --color-border: #dfe6e2;
+  --color-border-strong: #c3ccc7;
+
+  /* Bán kính bo góc & khoảng cách dùng chung */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Đổ bóng dùng cho card/nổi khối */
+  --shadow-sm: 0 1px 2px rgba(16, 24, 20, 0.06);
+  --shadow-card: 0 2px 8px rgba(16, 24, 20, 0.08);
+  --shadow-card-hover: 0 10px 24px rgba(46, 125, 50, 0.16);
+  --shadow-header: 0 2px 10px rgba(16, 24, 20, 0.12);
+
+  /* Typography dùng chung */
+  --font-sans:
+    'Inter', 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+}

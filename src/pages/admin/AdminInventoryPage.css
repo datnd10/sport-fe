@@ -1,0 +1,40 @@
+/* AdminInventoryPage styles — references design tokens from
+   src/styles/tokens.css, consistent with AdminForms.css conventions.
+   Highlights out-of-stock/low-stock rows using the state tokens per
+   Requirement 11.4's exception for error/warning components.
+   Requirements: 7.3, 7.4 */
+
+.admin-inventory-row-alert {
+  background-color: var(--color-state-warning-light);
+}
+
+.admin-inventory-quantity-input {
+  width: 6rem;
+  padding: 0.4em 0.6em;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-body);
+}
+
+.admin-inventory-quantity-input:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 1px;
+}
+
+.admin-inventory-history {
+  padding: 1rem;
+  background-color: var(--color-bg-muted);
+  border-radius: var(--radius-md);
+}
+
+.admin-inventory-change-positive {
+  color: var(--color-brand-primary);
+  font-weight: 700;
+}
+
+.admin-inventory-change-negative {
+  color: var(--color-state-error);
+  font-weight: 700;
+}

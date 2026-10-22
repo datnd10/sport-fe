@@ -1,0 +1,101 @@
+/* Shared layout for the Đăng ký (Register) and Đăng nhập (Login) pages.
+   References design tokens from src/styles/tokens.css.
+   Requirements: 11.1, 11.2 */
+
+.auth-page {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 1rem;
+  background: linear-gradient(160deg, var(--color-brand-primary-light) 0%, var(--color-bg-page) 55%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem;
+  box-shadow: var(--shadow-card-hover);
+}
+
+.auth-card h1 {
+  margin: 0 0 1.5rem;
+  color: var(--color-brand-primary);
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.auth-field label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-heading);
+}
+
+.auth-field input {
+  padding: 0.65em 0.85em;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-body);
+}
+
+.auth-field input:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 1px;
+}
+
+.auth-field-error {
+  color: var(--color-state-error);
+  font-size: 0.85rem;
+}
+
+.auth-form-error {
+  color: var(--color-state-error);
+  background-color: var(--color-state-error-light);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.auth-form-success {
+  color: var(--color-brand-primary);
+  background-color: var(--color-brand-primary-light);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.auth-card-footer {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.auth-card-footer a {
+  color: var(--color-brand-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-card-footer a:hover {
+  text-decoration: underline;
+}

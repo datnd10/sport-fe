@@ -1,0 +1,138 @@
+/* Shared Header styles — references design tokens from src/styles/tokens.css.
+   Used as the shell for Storefront layouts: shop title on the left,
+   cart indicator + auth actions/account info on the right.
+   Requirements: 6.1, 6.2, 6.5, 11.1, 11.2, 11.3 */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.85rem 2rem;
+  background: linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-primary-dark) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-header);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-header-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.app-header-title a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.app-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.app-header-cart {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  text-decoration: none;
+}
+
+.app-header-cart svg {
+  width: 20px;
+  height: 20px;
+}
+
+.app-header-cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background-color: var(--color-state-warning);
+  color: #1a1a1a;
+  font-size: 0.7rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.app-header-account {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.app-header-account-name {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.92rem;
+  padding: 0.4em 0.7em;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.12);
+  transition: background-color 0.15s ease;
+}
+
+.app-header-account-name:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.app-header-account-orders {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.92rem;
+  padding: 0.4em 0.7em;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.12);
+  transition: background-color 0.15s ease;
+}
+
+.app-header-account-orders:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.app-header-logout {
+  color: #fff;
+}
+
+.app-header-logout:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.app-header-auth-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.app-header-login {
+  color: #fff;
+}
+
+.app-header-login:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 720px) {
+  .app-header {
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+  }
+}

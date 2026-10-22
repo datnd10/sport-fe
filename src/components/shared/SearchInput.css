@@ -1,0 +1,22 @@
+/* Shared SearchInput styles — references design tokens from
+   src/styles/tokens.css. Requirements: 11.1, 11.2, 11.3 */
+
+.search-input {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.6em 0.9em;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-body);
+}
+
+.search-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-input:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 1px;
+}

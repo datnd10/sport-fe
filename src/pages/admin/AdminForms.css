@@ -1,0 +1,389 @@
+/* Shared form/card/list styles for Admin pages — references design
+   tokens from src/styles/tokens.css, mirroring the Storefront's
+   AuthForm.css conventions so both areas stay visually consistent.
+   Requirements: 11.1, 11.2, 11.3 */
+
+.admin-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 1.5rem;
+}
+
+.admin-card h3 {
+  margin: 0 0 1rem;
+  color: var(--color-text-heading);
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.admin-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.admin-form-field label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-heading);
+}
+
+.admin-form-field input,
+.admin-form-field select,
+.admin-form-field textarea {
+  padding: 0.6em 0.8em;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-body);
+}
+
+.admin-form-field input:focus-visible,
+.admin-form-field select:focus-visible,
+.admin-form-field textarea:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 1px;
+}
+
+.admin-field-error {
+  color: var(--color-state-error);
+  font-size: 0.85rem;
+}
+
+/* Plain-language hint shown under a technical field's label/input (e.g.
+   SKU, Thuộc tính, Ngưỡng sắp hết hàng) so non-technical Admin users
+   understand what to enter, without cluttering the UI like an error
+   message would. */
+.admin-field-hint {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.admin-form-error {
+  color: var(--color-state-error);
+  background-color: var(--color-state-error-light);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.admin-form-success {
+  color: var(--color-brand-primary);
+  background-color: var(--color-brand-primary-light);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.admin-form-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.admin-filter-row {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-filter-fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Row holding page-level primary actions (e.g. "Thêm sản phẩm mới"),
+   placed below the filter row and right-aligned above the table. */
+.admin-action-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.25rem;
+}
+
+/* Select styled to match .search-input's height, border and radius, so
+   it sits flush next to it in a filter row instead of looking like a
+   plain unstyled browser control. */
+.admin-select {
+  width: 100%;
+  max-width: 220px;
+  padding: 0.6em 0.9em;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-body);
+}
+
+.admin-select:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 1px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.92rem;
+}
+
+.admin-table th {
+  color: var(--color-text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.admin-table-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Sortable column headers (click to sort, reused by any Admin list
+   table — currently the Sản_Phẩm list's "Tên sản phẩm"/"Giá cơ bản"
+   columns). */
+.admin-table-th-sortable {
+  padding: 0;
+}
+
+.admin-table-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  transition: color 0.15s ease;
+}
+
+.admin-table-sort-btn:hover {
+  color: var(--color-brand-primary);
+}
+
+.admin-table-sort-btn:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
+}
+
+/* ChevronIcon points left by default; rotated -90deg it points down
+   (sorted descending) and 90deg it points up (sorted ascending). Dimmed
+   until the column is the active sort, so it still hints "sortable" on
+   hover without competing with the active arrow. */
+.admin-table-sort-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.35;
+  transform: rotate(-90deg);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.admin-table-sort-btn:hover .admin-table-sort-icon {
+  opacity: 0.6;
+}
+
+.admin-table-sort-icon-active {
+  opacity: 1;
+}
+
+.admin-table-sort-btn:hover .admin-table-sort-icon-active {
+  opacity: 1;
+}
+
+.admin-table-sort-icon-asc {
+  transform: rotate(90deg);
+}
+
+.admin-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-body);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.admin-icon-btn:hover {
+  background-color: var(--color-brand-primary-light);
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+}
+
+.admin-icon-btn-danger:hover {
+  background-color: var(--color-state-error-light);
+  border-color: var(--color-state-error);
+  color: var(--color-state-error);
+}
+
+/* Prominent circular icon-only button for primary page actions (e.g.
+   "Thêm sản phẩm mới"), styled with the brand primary token so it
+   stands out from the plain outlined .admin-icon-btn used for
+   secondary row actions. */
+.admin-icon-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-brand-primary);
+  background-color: var(--color-brand-primary);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(46, 125, 50, 0.25);
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.admin-icon-btn-primary:hover {
+  background-color: var(--color-brand-primary-hover);
+  border-color: var(--color-brand-primary-hover);
+}
+
+.admin-icon-btn-primary:active {
+  transform: translateY(1px);
+}
+
+.admin-icon-btn-primary:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
+}
+
+/* Explicit search-submit button, placed next to the filter fields so
+   searching only happens when the user asks for it (click or Enter). */
+.admin-search-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-brand-primary);
+  background-color: var(--color-brand-primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.admin-search-btn:hover {
+  background-color: var(--color-brand-primary-hover);
+  border-color: var(--color-brand-primary-hover);
+}
+
+.admin-search-btn:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
+}
+
+.admin-order-no-action {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.admin-product-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.admin-product-image-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-bg-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.5rem;
+}
+
+.admin-product-image-item img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+/* List of files picked (but not yet uploaded) in ProductCreateModal,
+   shown before the product is created since images can only be
+   uploaded once a productId exists. */
+.admin-selected-files {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.admin-selected-file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.4rem 0.6rem;
+  background-color: var(--color-bg-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--color-text-body);
+}
+
+.admin-selected-file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* Small preview thumbnail for a picked-but-not-yet-uploaded image file,
+   rendered from a temporary URL.createObjectURL(file) so the Admin can
+   confirm they selected the right image before it's uploaded. */
+.admin-selected-file-thumb {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}

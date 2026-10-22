@@ -1,0 +1,61 @@
+/* Shared Modal styles — references design tokens from src/styles/tokens.css.
+   Simple overlay + centered panel, no external dependency. */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(16, 24, 20, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 10;
+}
+
+.modal-panel {
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card-hover);
+  width: 100%;
+  max-width: 720px;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  background-color: var(--color-bg-surface);
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--color-text-heading);
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+  padding: 0.3rem;
+  border-radius: var(--radius-sm);
+}
+
+.modal-close:hover {
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-heading);
+}
+
+.modal-body {
+  padding: 1.5rem;
+}

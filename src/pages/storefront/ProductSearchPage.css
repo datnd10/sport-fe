@@ -1,0 +1,68 @@
+/* Trang tìm kiếm Sản_Phẩm (Product search page) styles — references
+   design tokens from src/styles/tokens.css. Requirements: 2.3, 2.4, 2.6 */
+
+.product-search-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.product-search-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  display: flex;
+  gap: 1.75rem;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.product-search-sidebar {
+  flex: 0 0 260px;
+  position: sticky;
+  top: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-search-results {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.product-search-heading {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.product-search-status {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2rem 0;
+}
+
+.product-search-status-error {
+  color: var(--color-state-error);
+}
+
+@media (max-width: 720px) {
+  .product-search-content {
+    flex-direction: column;
+  }
+
+  .product-search-sidebar {
+    flex: 1 1 auto;
+    width: 100%;
+    position: static;
+  }
+}

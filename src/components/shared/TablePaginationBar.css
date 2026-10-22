@@ -1,0 +1,33 @@
+/* TablePaginationBar — references design tokens from src/styles/tokens.css.
+   Two-corner layout for paginated Admin tables: page-size selector +
+   total record count on the left, page navigation on the right. */
+
+.table-pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.table-pagination-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.table-pagination-size-select {
+  padding: 0.35em 0.6em;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-body);
+}
+
+.table-pagination-bar .pagination {
+  margin-top: 0;
+}

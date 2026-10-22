@@ -1,0 +1,51 @@
+/* Trang chủ (Homepage) styles — references design tokens from
+   src/styles/tokens.css. Requirements: 2.1, 2.2, 11.1, 11.2 */
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.home-page-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  box-sizing: border-box;
+}
+
+.home-section h2 {
+  margin: 0 0 1.1rem;
+  text-align: left;
+  font-size: 1.4rem;
+}
+
+.category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.home-page-status {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2rem 0;
+}
+
+.home-page-status-error {
+  color: var(--color-state-error);
+}
+
+.home-page-empty {
+  color: var(--color-text-muted);
+}

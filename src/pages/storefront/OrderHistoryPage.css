@@ -1,0 +1,116 @@
+/* Trang lịch sử Đơn_Hàng styles — references design tokens from
+   src/styles/tokens.css. Requirements: 5.1, 11.1, 11.2 */
+
+.order-history-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.order-history-content {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-sizing: border-box;
+}
+
+.order-history-title {
+  margin: 0;
+  color: var(--color-text-heading);
+}
+
+.order-history-status {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2rem 0;
+}
+
+.order-history-error {
+  color: var(--color-state-error);
+  background-color: var(--color-state-error-light);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.order-history-empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.order-history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.order-history-item {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.order-history-item-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.order-history-item-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.order-history-item-code {
+  font-weight: 600;
+  color: var(--color-text-heading);
+}
+
+.order-history-item-date {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.order-history-item-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+.order-history-item-total {
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .order-history-item-link {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .order-history-item-meta {
+    align-items: flex-start;
+    flex-direction: row;
+  }
+}

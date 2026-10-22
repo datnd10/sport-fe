@@ -1,0 +1,224 @@
+/* Trang Checkout styles — references design tokens from
+   src/styles/tokens.css. Requirements: 4.1, 4.3, 4.4, 4.5, 4.6, 4.7, 11.1, 11.2 */
+
+.checkout-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.checkout-page-content {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-sizing: border-box;
+}
+
+.checkout-page-title {
+  margin: 0;
+  color: var(--color-text-heading);
+}
+
+.checkout-page-empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checkout-page-body {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.checkout-page-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.checkout-section {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.3rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checkout-section-title {
+  margin: 0;
+  color: var(--color-text-heading);
+  font-size: 1.05rem;
+}
+
+.checkout-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.checkout-field label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text-heading);
+}
+
+.checkout-field input {
+  padding: 0.65em 0.85em;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-body);
+}
+
+.checkout-field input:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 1px;
+}
+
+.checkout-field-error {
+  color: var(--color-state-error);
+  font-size: 0.85rem;
+}
+
+.checkout-payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.checkout-payment-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.checkout-payment-option:has(input:checked) {
+  border-color: var(--color-brand-primary);
+  background-color: var(--color-brand-primary-light);
+}
+
+.checkout-payment-note {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.checkout-discount-input {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.checkout-discount-input input {
+  flex: 1;
+  padding: 0.65em 0.85em;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-body);
+}
+
+.checkout-discount-applied {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 0.6rem 0.8rem;
+  background-color: var(--color-brand-primary-light);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-body);
+}
+
+.checkout-summary {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.3rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.checkout-summary-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.checkout-summary-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--color-text-body);
+}
+
+.checkout-summary-item-name {
+  min-width: 0;
+}
+
+.checkout-summary-row {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text-body);
+}
+
+.checkout-summary-discount {
+  color: var(--color-brand-primary);
+}
+
+.checkout-summary-total {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.6rem;
+}
+
+.checkout-form-error {
+  color: var(--color-state-error);
+  background-color: var(--color-state-error-light);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.checkout-submit {
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .checkout-page-body {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-summary {
+    position: static;
+  }
+}

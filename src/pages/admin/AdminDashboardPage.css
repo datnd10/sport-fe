@@ -1,0 +1,60 @@
+/* AdminDashboardPage styles — references design tokens from
+   src/styles/tokens.css, consistent with AdminForms.css/AdminInventoryPage.css
+   conventions. Highlights the low-stock stat card using the state
+   tokens per Requirement 11.4's exception for error/warning components.
+   Requirements: 10.1, 10.2, 10.3 */
+
+.admin-dashboard-filters {
+  display: flex;
+  align-items: center;
+}
+
+.admin-dashboard-range-field {
+  max-width: 220px;
+}
+
+.admin-dashboard-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-dashboard-stat-card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1.25rem 1.5rem;
+}
+
+.admin-dashboard-stat-card-alert {
+  background-color: var(--color-state-warning-light);
+}
+
+.admin-dashboard-stat-label {
+  margin: 0 0 0.4rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.admin-dashboard-stat-value {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-heading);
+}
+
+.admin-dashboard-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-dashboard-chart-card h3 {
+  margin: 0 0 1rem;
+}

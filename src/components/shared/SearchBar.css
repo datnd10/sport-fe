@@ -1,0 +1,28 @@
+/* Shared SearchBar styles — references design tokens from
+   src/styles/tokens.css. Placed next to the FilterPanel on listing
+   pages (Requirement 2.3, 2.6), on the page's neutral background rather
+   than the header. Requirements: 2.3, 11.1, 11.2, 11.3 */
+
+.search-bar {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-bar-input {
+  flex: 1;
+  padding: 0.6em 0.9em;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-body);
+}
+
+.search-bar-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-bar-input:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 1px;
+}

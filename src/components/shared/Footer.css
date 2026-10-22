@@ -1,0 +1,96 @@
+/* Shared Footer styles — references design tokens from src/styles/tokens.css.
+   Shown at the bottom of every Storefront page.
+   Requirements: 11.1, 11.2, 11.3 */
+
+.app-footer {
+  margin-top: auto;
+  background-color: var(--color-brand-primary-dark);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.app-footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 1.5rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.3fr;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+.app-footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.app-footer-title {
+  margin: 0;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.app-footer-text {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.app-footer-heading {
+  margin: 0 0 0.2rem;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.app-footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.app-footer-links a {
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.15s ease;
+}
+
+.app-footer-links a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.app-footer-contact {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.app-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.app-footer-bottom p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+@media (max-width: 720px) {
+  .app-footer-content {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.25rem 1rem;
+  }
+}

@@ -1,0 +1,295 @@
+/* AdminLayout styles — references design tokens from src/styles/tokens.css,
+   consistent with the Storefront Header's brand gradient.
+   Fixed left sidebar + top header above the content area. The sidebar
+   supports two independent toggle mechanisms:
+   - Mobile (<880px): a CSS-only checkbox fully hides/shows the sidebar.
+   - Desktop (>=880px): a React-controlled "collapsed" class shrinks the
+     sidebar to an icon rail, with a width transition for a smooth feel.
+   Requirements: 11.1, 11.2, 11.3 */
+
+.admin-layout {
+  min-height: 100vh;
+  background-color: var(--color-bg-page);
+  display: flex;
+}
+
+.admin-sidebar-toggle-input {
+  display: none;
+}
+
+.admin-sidebar {
+  width: 230px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 1rem;
+  background: linear-gradient(165deg, var(--color-brand-primary) 0%, var(--color-brand-primary-dark) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-header);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  transition: width 0.2s ease, padding 0.2s ease;
+}
+
+.admin-sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.admin-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  padding: 0 0.25rem;
+  overflow: hidden;
+}
+
+.admin-sidebar-brand-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.admin-sidebar-brand-text {
+  white-space: nowrap;
+}
+
+.admin-sidebar-collapse-toggle {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.2s ease;
+}
+
+.admin-sidebar-collapse-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.admin-sidebar-collapse-icon-flipped {
+  transform: rotate(180deg);
+}
+
+.admin-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-sidebar-nav .nav-link {
+  justify-content: flex-start;
+  width: 100%;
+  border-radius: var(--radius-md);
+  background-color: transparent;
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.88);
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+.admin-sidebar-nav-icon {
+  flex-shrink: 0;
+}
+
+.admin-sidebar-nav-label {
+  white-space: nowrap;
+}
+
+.admin-sidebar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: transparent;
+  color: #fff;
+  transform: none;
+}
+
+.admin-sidebar-nav .nav-link-active {
+  background-color: #fff;
+  border-color: #fff;
+  color: var(--color-brand-primary);
+}
+
+.admin-sidebar-nav .nav-link-active:hover {
+  background-color: #fff;
+  border-color: #fff;
+  color: var(--color-brand-primary);
+}
+
+.admin-sidebar-account {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0.75rem 0.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Logout needs to read as a clickable button against the dark sidebar
+   gradient, not a bare text link, so it gets its own translucent
+   background/border on top of the shared .btn-ghost base — matching
+   how .admin-sidebar-collapse-toggle styles a button for this same
+   dark surface. */
+.admin-sidebar-logout {
+  width: 100%;
+  justify-content: center;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Must match (or exceed) the specificity of .btn-ghost:hover:not(:disabled)
+   from Button.css (0,3,0), otherwise the shared ghost-button hover style
+   (a near-white background) wins and leaves the white "Đăng xuất" label
+   unreadable against it. Repeating :not(:disabled) here brings this rule
+   to the same specificity, and since it is a more specific selector wins by
+   the "last declared" tie-break only when equal — so color is also
+   re-asserted explicitly to guarantee contrast regardless of import order. */
+.admin-sidebar-logout:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+
+.admin-sidebar-logout-icon {
+  flex-shrink: 0;
+}
+
+.admin-sidebar-logout-label {
+  white-space: nowrap;
+}
+
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 2rem;
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.admin-header-title {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--color-text-heading);
+  flex: 1;
+}
+
+.admin-sidebar-toggle-label {
+  display: none;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color-text-heading);
+}
+
+.admin-content {
+  flex: 1;
+  padding: 1.5rem 2rem 3rem;
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Desktop collapsed state: shrink the sidebar to an icon rail. Nav
+   labels and the logout button's text label are hidden, leaving just
+   icons (the logout button itself still renders so it stays usable). */
+.admin-layout-collapsed .admin-sidebar {
+  width: 72px;
+  padding: 1.5rem 0.75rem;
+}
+
+.admin-layout-collapsed .admin-sidebar-brand-text,
+.admin-layout-collapsed .admin-sidebar-nav-label,
+.admin-layout-collapsed .admin-sidebar-logout-label {
+  display: none;
+}
+
+.admin-layout-collapsed .admin-sidebar-top {
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-layout-collapsed .admin-sidebar-nav .nav-link {
+  justify-content: center;
+}
+
+.admin-layout-collapsed .admin-sidebar-account {
+  align-items: center;
+}
+
+.admin-layout-collapsed .admin-sidebar-logout {
+  width: auto;
+  padding: 0.65em;
+}
+
+@media (max-width: 880px) {
+  .admin-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 2;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+
+  .admin-sidebar-toggle-input:checked ~ .admin-sidebar {
+    transform: translateX(0);
+  }
+
+  .admin-sidebar-toggle-label {
+    display: inline-flex;
+  }
+
+  /* The desktop collapse toggle only makes sense once the sidebar is
+     always visible; on mobile the checkbox above already controls
+     show/hide, so hide the collapse button to avoid a confusing second
+     control. */
+  .admin-sidebar-collapse-toggle {
+    display: none;
+  }
+
+  .admin-layout-collapsed .admin-sidebar {
+    width: 230px;
+    padding: 1.5rem 1rem;
+  }
+
+  .admin-layout-collapsed .admin-sidebar-brand-text,
+  .admin-layout-collapsed .admin-sidebar-nav-label,
+  .admin-layout-collapsed .admin-sidebar-logout-label {
+    display: initial;
+  }
+
+  .admin-layout-collapsed .admin-sidebar-logout {
+    width: 100%;
+    padding: 0.35em 0.6em;
+  }
+
+  .admin-header,
+  .admin-content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
