@@ -25,6 +25,7 @@ async function listInventory(params: AdminInventoryListParams = {}): Promise<Pag
       page: params.page,
       size: params.size,
       keyword: params.keyword || undefined,
+      stockStatus: params.stockStatus || undefined,
     },
   })
   return response.data

@@ -27,7 +27,18 @@ async function updateProfile(payload: UpdateProfileRequest): Promise<AccountResp
   return response.data
 }
 
+export interface ChangePasswordRequest {
+  currentPassword: string
+  newPassword: string
+  confirmPassword: string
+}
+
+async function changePassword(request: ChangePasswordRequest): Promise<void> {
+  await apiClient.put(`${ACCOUNT_BASE}/me/password`, request)
+}
+
 export const accountService = {
+  changePassword,
   getProfile,
   updateProfile,
 }

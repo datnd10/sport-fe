@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { RequireAdmin, RequireAuth } from './components/routing'
@@ -24,6 +24,7 @@ import ProductSearchPage from './pages/storefront/ProductSearchPage'
 import ProfilePage from './pages/storefront/ProfilePage'
 import RegisterPage from './pages/storefront/RegisterPage'
 import { useAccountStore } from './store/accountStore'
+import StorefrontAccess from './components/routing/StorefrontAccess'
 
 // Routing skeleton for task 22, extended with Auth routes in task 24.1
 // and route guards + Hồ sơ cá nhân (Profile) in task 24.2, the
@@ -39,14 +40,18 @@ import { useAccountStore } from './store/accountStore'
 // task 28.
 function App() {
   const restoreSession = useAccountStore((state) => state.restoreSession)
+  const [sessionReady, setSessionReady] = useState(false)
 
   useEffect(() => {
-    restoreSession()
+    let active = true
+    restoreSession().finally(() => { if (active) setSessionReady(true) })
+    return () => { active = false }
   }, [restoreSession])
 
   return (
     <BrowserRouter>
       <Toaster position="top-right" richColors closeButton />
+      <StorefrontAccess sessionReady={sessionReady}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/categories/:categoryId" element={<CategoryProductsPage />} />
@@ -162,6 +167,7 @@ function App() {
           }
         />
       </Routes>
+      </StorefrontAccess>
     </BrowserRouter>
   )
 }

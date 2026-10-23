@@ -1,6 +1,7 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { Badge, Button, Footer, Header } from '../../components/shared'
 import type { OrderResponse } from '../../services/orderService.types'
+import { resolveUploadUrl } from '../../services/apiClient'
 import './OrderConfirmationPage.css'
 
 function formatPrice(price: number): string {
@@ -78,7 +79,7 @@ function OrderConfirmationPage() {
             {order.bankTransferInfo.qrImageUrl ? (
               <img
                 className="order-confirmation-qr"
-                src={order.bankTransferInfo.qrImageUrl}
+                src={resolveUploadUrl(order.bankTransferInfo.qrImageUrl)}
                 alt="Mã QR chuyển khoản"
               />
             ) : null}

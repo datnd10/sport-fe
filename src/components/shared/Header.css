@@ -3,6 +3,24 @@
    cart indicator + auth actions/account info on the right.
    Requirements: 6.1, 6.2, 6.5, 11.1, 11.2, 11.3 */
 
+.account-dropdown { position: relative; }
+.account-dropdown:not([open]) > .account-dropdown-panel { display: none; }
+.account-dropdown-trigger { display: flex; align-items: center; gap: .65rem; max-width: 390px; min-height: 44px; padding: .25rem .6rem .25rem .25rem; border: 1px solid transparent; border-radius: 30px; cursor: pointer; list-style: none; color: white; font-size: .85rem; font-weight: 400; background: transparent; transition: background-color .15s, border-color .15s; }
+.account-dropdown-trigger:hover, .account-dropdown[open] .account-dropdown-trigger { background: rgb(255 255 255 / 8%); border-color: rgb(255 255 255 / 18%); }
+.account-avatar { display: grid; place-items: center; flex: 0 0 34px; width: 34px; height: 34px; border: 1px solid rgb(255 255 255 / 35%); border-radius: 50%; background: rgb(255 255 255 / 10%); }
+.account-avatar svg { width: 21px; height: 21px; }
+.account-greeting { color: rgb(255 255 255 / 85%); min-width: 0; line-height: 1.5; }
+.account-greeting strong { color: white; font-weight: 600; }
+.account-chevron { flex: 0 0 16px; width: 16px; height: 16px; transition: transform .15s; opacity: .8; }
+.account-dropdown-trigger::-webkit-details-marker { display: none; }
+.account-dropdown-trigger:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+.account-dropdown[open] .account-chevron { transform: rotate(180deg); }
+.account-dropdown-panel { position: absolute; right: 0; top: calc(100% + .7rem); width: 245px; max-width: calc(100vw - 2rem); display: flex; flex-direction: column; gap: .2rem; padding: .5rem; border: 1px solid var(--color-border); border-radius: 10px; background: white; box-shadow: var(--shadow-card-hover); color: var(--color-text-heading); z-index: 30; }
+.account-dropdown-panel a, .account-dropdown-panel button { display: block; padding: .8rem .85rem; border: 0; border-radius: 6px; background: transparent; color: var(--color-text-heading); text-align: left; text-decoration: none; font: inherit; font-size: .85rem; cursor: pointer; }
+.account-dropdown-panel a:hover, .account-dropdown-panel button:hover { background: var(--color-brand-primary-light); color: var(--color-brand-primary); }
+.account-dropdown-panel button { border-top: 1px solid var(--color-border); border-radius: 0 0 6px 6px; color: var(--color-state-error); }
+.account-dropdown-panel a:focus-visible, .account-dropdown-panel button:focus-visible { outline: 2px solid var(--color-brand-primary); }
+
 .app-header {
   background: linear-gradient(135deg, var(--color-brand-primary) 0%, var(--color-brand-primary-dark) 100%);
   color: #fff;

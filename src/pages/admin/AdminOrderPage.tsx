@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FormEvent } from 'react'
 import { Badge, Button, SearchIcon, TablePaginationBar } from '../../components/shared'
 import type { BadgeVariant } from '../../components/shared'
@@ -70,6 +71,9 @@ const CANCELLABLE_STATUSES: OrderStatus[] = ['PENDING', 'CONFIRMED']
  * hàng khi checkout.
  */
 function AdminOrderPage() {
+  const [searchParams] = useSearchParams()
+  const initialStatus = FILTERABLE_STATUSES.find(s => s === searchParams.get('status')) ?? ''
+  const initialKeyword = searchParams.get('keyword') ?? ''
   const [orders, setOrders] = useState<OrderSummaryResponse[]>([])
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE)
@@ -79,10 +83,10 @@ function AdminOrderPage() {
   // "applied" tracks what was last submitted and is what loadOrders
   // actually queries with. Search/filtering only takes effect once the
   // user clicks "Tìm kiếm" — not on every keystroke or select change.
-  const [keywordDraft, setKeywordDraft] = useState('')
-  const [statusDraft, setStatusDraft] = useState<OrderStatus | ''>('')
-  const [appliedKeyword, setAppliedKeyword] = useState('')
-  const [appliedStatus, setAppliedStatus] = useState<OrderStatus | ''>('')
+  const [keywordDraft, setKeywordDraft] = useState(initialKeyword)
+  const [statusDraft, setStatusDraft] = useState<OrderStatus | ''>(initialStatus)
+  const [appliedKeyword, setAppliedKeyword] = useState(initialKeyword)
+  const [appliedStatus, setAppliedStatus] = useState<OrderStatus | ''>(initialStatus)
   const [isLoading, setIsLoading] = useState(true)
   const [loadError, setLoadError] = useState<string | null>(null)
 

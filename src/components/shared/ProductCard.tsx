@@ -76,11 +76,17 @@ function ProductCard({ product }: ProductCardProps) {
         ) : null}
         <span className={thumbnail ? 'product-card-image-fallback product-card-image-fallback-hidden' : 'product-card-image-fallback'}>
           <ProductImagePlaceholder />
+          <span className="product-card-placeholder-brand">LananhSport</span>
         </span>
       </div>
       <div className="product-card-body">
         <h3 className="product-card-name">{product.name}</h3>
         <p className="product-card-price">{formatPrice(product.basePrice)}</p>
+        <p className="product-card-rating">
+          {(product.reviewCount ?? 0) > 0
+            ? <><span className="product-card-star" aria-hidden="true">★</span><span className="product-card-score">{product.averageRating?.toFixed(1)}</span><span>({product.reviewCount} đánh giá)</span></>
+            : 'Chưa có đánh giá'}
+        </p>
         <div className="product-card-badges">
           {stockStatus === 'out-of-stock' ? <Badge variant="error">Hết hàng</Badge> : null}
           {stockStatus === 'low-stock' ? <Badge variant="warning">Sắp hết hàng</Badge> : null}

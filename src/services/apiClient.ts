@@ -29,6 +29,7 @@ export const API_ORIGIN = API_BASE_URL.replace(/\/api\/?$/, '')
  * backend's origin.
  */
 export function resolveUploadUrl(filePath: string): string {
+  if (/^https?:\/\//i.test(filePath)) return filePath
   const normalizedPath = filePath.startsWith('/') ? filePath : `/${filePath}`
   return `${API_ORIGIN}${normalizedPath}`
 }

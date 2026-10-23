@@ -18,6 +18,8 @@ export interface ProductVariantResponse {
 }
 
 export interface ProductResponse {
+  averageRating?: number
+  reviewCount?: number
   id: string
   categoryId: string
   name: string
@@ -29,6 +31,10 @@ export interface ProductResponse {
 }
 
 export interface ProductSearchResult {
+  totalElements?: number
+  totalPages?: number
+  page?: number
+  size?: number
   products: ProductResponse[]
   suggestedCategories: CategoryResponse[]
 }
@@ -58,6 +64,10 @@ export interface ProductDetailResponse {
 
 /** Query parameters accepted by GET /api/products (Requirement 2.2, 2.6). */
 export interface ProductListParams {
+  page?: number
+  size?: number
+  minRating?: number
+  sort?: string
   categoryId?: string
   keyword?: string
   minPrice?: number

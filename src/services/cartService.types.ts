@@ -3,6 +3,8 @@
 
 /** A single line item within a Giỏ_Hàng (Cart), as returned by the backend. */
 export interface CartItemResponse {
+  productId?: string
+  imagePath?: string | null
   id: string
   variantId: string
   productName: string

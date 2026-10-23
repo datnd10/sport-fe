@@ -1,6 +1,6 @@
 import { apiClient } from './apiClient'
 import type { PageResponse } from './common.types'
-import type { AdminReviewListParams, ProductReviewListResponse, ReviewResponse } from './reviewService.types'
+import type { AdminReviewListParams, ProductReviewListResponse, ReviewResponse, ReviewEligibility } from './reviewService.types'
 
 // API client for the Product_Review module (design.md — "Module Product
 // Review"). Talks to the public GET /api/products/{id}/reviews endpoint,
@@ -49,7 +49,22 @@ async function hideReview(reviewId: string): Promise<ReviewResponse> {
   return response.data
 }
 
+async function getEligibility(productId: string): Promise<ReviewEligibility[]> {
+  const response = await apiClient.get<ReviewEligibility[]>('/account/review-eligibility', { params: { productId } })
+  return response.data
+}
+
+async function submitReview(productId: string, request: { orderItemId: string; rating: number; comment: string }, images: File[]): Promise<ReviewResponse> {
+  const form = new FormData()
+  form.append('review', new Blob([JSON.stringify(request)], { type: 'application/json' }))
+  images.forEach((image) => form.append('images', image))
+  const response = await apiClient.post<ReviewResponse>(`${PRODUCT_BASE}/${productId}/reviews`, form, { headers: { 'Content-Type': 'multipart/form-data' } })
+  return response.data
+}
+
 export const reviewService = {
+  getEligibility,
+  submitReview,
   getReviewsByProduct,
   getAllReviews,
   hideReview,

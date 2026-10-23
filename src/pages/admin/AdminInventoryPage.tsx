@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { FormEvent } from 'react'
 import { Badge, Button, SearchIcon, TablePaginationBar } from '../../components/shared'
 import { getErrorMessage } from '../../services/apiError'
@@ -7,6 +8,7 @@ import type {
   InventoryChangeReason,
   InventoryHistoryResponse,
   InventoryItemResponse,
+  StockStatus,
 } from '../../services/inventoryService.types'
 import { notifySuccess } from '../../services/toast'
 import AdminLayout from './AdminLayout'
@@ -37,6 +39,11 @@ const REASON_LABELS: Record<InventoryChangeReason, string> = {
  * qua module Sản_Phẩm.
  */
 function AdminInventoryPage() {
+  const [searchParams] = useSearchParams()
+  const initialKeyword = searchParams.get('keyword') ?? ''
+  const initialStockStatus = (['OUT_OF_STOCK', 'LOW_STOCK', 'IN_STOCK'] as StockStatus[]).find(s => s === searchParams.get('stockStatus')) ?? ''
+  const [stockDraft, setStockDraft] = useState<StockStatus | ''>(initialStockStatus)
+  const [appliedStock, setAppliedStock] = useState<StockStatus | ''>(initialStockStatus)
   const [items, setItems] = useState<InventoryItemResponse[]>([])
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE)
@@ -46,8 +53,8 @@ function AdminInventoryPage() {
   // what was last submitted and is what loadInventory actually queries
   // with. Search only takes effect once the user clicks "Tìm kiếm" (or
   // presses Enter in the text input) — not on every keystroke.
-  const [keywordDraft, setKeywordDraft] = useState('')
-  const [appliedKeyword, setAppliedKeyword] = useState('')
+  const [keywordDraft, setKeywordDraft] = useState(initialKeyword)
+  const [appliedKeyword, setAppliedKeyword] = useState(initialKeyword)
   const [isLoading, setIsLoading] = useState(true)
   const [loadError, setLoadError] = useState<string | null>(null)
 
@@ -71,6 +78,7 @@ function AdminInventoryPage() {
         page,
         size: pageSize,
         keyword: appliedKeyword.trim() || undefined,
+        stockStatus: appliedStock || undefined,
       })
       setItems(pageResponse.content)
       setTotalPages(pageResponse.totalPages)
@@ -80,13 +88,14 @@ function AdminInventoryPage() {
     } finally {
       setIsLoading(false)
     }
-  }, [page, pageSize, appliedKeyword])
+  }, [page, pageSize, appliedKeyword, appliedStock])
 
   // Gọi lại API mỗi khi trang, kích thước trang, hoặc từ khóa ĐÃ ÁP DỤNG
   // (applied) thay đổi — không phụ thuộc vào draft, nên gõ trong ô tìm
   // kiếm sẽ không tự gọi lại API cho đến khi người dùng bấm "Tìm kiếm".
   useEffect(() => {
-    loadInventory()
+    async function load() { await loadInventory() }
+    void load()
   }, [loadInventory])
 
   function handleKeywordDraftChange(nextKeyword: string) {
@@ -96,6 +105,7 @@ function AdminInventoryPage() {
   function handleSearchSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setAppliedKeyword(keywordDraft)
+    setAppliedStock(stockDraft)
     setPage(0)
   }
 
@@ -195,6 +205,7 @@ function AdminInventoryPage() {
               placeholder="Tìm theo SKU hoặc tên sản phẩm..."
             />
           </div>
+          <div className="admin-form-field"><label htmlFor="admin-inventory-stock-filter">Tình trạng tồn kho</label><select className="admin-select" id="admin-inventory-stock-filter" value={stockDraft} onChange={e => setStockDraft(e.target.value as StockStatus | '')}><option value="">Tất cả</option><option value="OUT_OF_STOCK">Hết hàng (đang hoạt động)</option><option value="LOW_STOCK">Sắp hết hàng (đang hoạt động)</option><option value="IN_STOCK">Còn hàng (đang hoạt động)</option></select></div>
           <button type="submit" className="admin-search-btn" aria-label="Tìm kiếm" title="Tìm kiếm">
             <SearchIcon />
           </button>

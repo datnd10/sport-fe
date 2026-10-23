@@ -183,7 +183,7 @@ function RegisterPage() {
               ) : null}
             </div>
 
-            <div className="auth-form-row">
+            <>
               <div className="auth-field">
                 <label htmlFor="register-phone">Số điện thoại</label>
                 <input
@@ -209,7 +209,7 @@ function RegisterPage() {
                 />
                 {fieldErrors.address ? <span className="auth-field-error">{fieldErrors.address}</span> : null}
               </div>
-            </div>
+            </>
 
             {formError ? (
               <p className="auth-form-error" role="alert">

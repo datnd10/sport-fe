@@ -1,0 +1,27 @@
+.available-discounts { display: flex; flex-direction: column; gap: .85rem; }
+.available-discounts-heading { display: flex; align-items: center; gap: .5rem; color: var(--color-brand-primary); }
+.available-discounts-heading h4 { margin: 0; font-size: .9rem; }
+.available-discounts-intro, .available-discounts-note { color: var(--color-text-muted); line-height: 1.6; font-size: .75rem; margin: 0; }
+.available-discounts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: .75rem; max-height: 350px; overflow-y: auto; padding-right: .25rem; }
+.available-discount { display: flex; align-items: center; gap: .8rem; border: 1px solid var(--color-border); border-radius: 10px; padding: .85rem; }
+.available-discount.is-applied { border-color: var(--color-brand-primary); background: #f4faf4; }
+.available-discount-value { align-self: stretch; display: flex; justify-content: center; flex-direction: column; gap: .4rem; min-width: 90px; border-right: 1px dashed var(--color-border-strong); padding-right: .8rem; color: var(--color-brand-primary); }
+.available-discount-value > span { font-size: .55rem; letter-spacing: .12em; font-weight: 700; }
+.available-discount-value strong { font-size: 1rem; }
+.available-discount-info { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: .4rem; }
+.available-discount-info > div { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.available-discount-info strong { font-size: .8rem; overflow-wrap: anywhere; }
+.available-discount-info > span { font-size: .75rem; color: var(--color-text-body); }
+.available-discount-info small { font-size: .65rem; color: var(--color-text-muted); }
+.available-discount-best { color: var(--color-brand-primary); background: var(--color-brand-primary-light); padding: .2rem .4rem; border-radius: 4px; font-size: .55rem; font-weight: 600; }
+.available-discount .btn { min-height: 40px; font-size: .7rem; padding: .5rem .65rem; flex-shrink: 0; }
+.available-discounts-feedback { font-size: .8rem; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
+.available-discounts-feedback .btn { margin-left: .5rem; }
+.available-discounts-loading { min-height: 95px; border-radius: 10px; }
+.checkout-manual-discount { border-top: 1px solid var(--color-border); padding-top: 1rem; display: flex; flex-direction: column; gap: .6rem; }
+.checkout-manual-discount > label { font-size: .8rem; color: var(--color-text-muted); }
+.checkout-discount-input input { min-width: 0; width: 100%; }
+.checkout-page { min-height: 100svh; flex: 1; }
+.checkout-page-content { flex: 1; }
+@media (max-width: 520px) { .available-discount { flex-wrap: wrap; gap: .65rem; } .available-discount-value { min-width: 80px; } .available-discount-info { min-width: 130px; } .available-discount > .btn { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .available-discounts-loading { animation: none; } }

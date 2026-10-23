@@ -29,6 +29,8 @@ import { useAccountStore } from './accountStore'
 // one CartItemView[] shape and call addItem/updateItemQuantity/removeItem
 // — they never need to branch on guest vs. authenticated mode.
 export interface CartItemView {
+  productId?: string
+  imagePath?: string | null
   /** The server-side cart item id once authenticated; the variantId for
    * guest carts (which have no server-assigned item id). Stable enough to
    * use as a React list key and as the id updateItemQuantity/removeItem
