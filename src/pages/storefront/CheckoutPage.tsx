@@ -10,6 +10,8 @@ import { notifySuccess } from '../../services/toast'
 import { useAccountStore } from '../../store/accountStore'
 import { useCartStore } from '../../store/cartStore'
 import './CheckoutPage.css'
+import AvailableDiscounts from './AvailableDiscounts'
+import { computeDiscountAmount } from '../../services/discountPricing'
 
 function formatPrice(price: number): string {
   return price.toLocaleString('vi-VN') + ' đ'
@@ -52,8 +54,9 @@ function CheckoutPage() {
   const discountAmount = computeDiscountAmount(appliedDiscount, totalAmount)
   const payableAmount = Math.max(totalAmount - discountAmount, 0)
 
-  async function handleApplyDiscount() {
-    const code = discountCodeInput.trim()
+  async function handleApplyDiscount(selectedCode?: string) {
+    if (isValidatingDiscount || isSubmitting) return
+    const code = (selectedCode ?? discountCodeInput).trim()
     setDiscountError(null)
     if (!code) {
       return
@@ -63,6 +66,7 @@ function CheckoutPage() {
     try {
       const validation = await discountService.validateCode(code)
       setAppliedDiscount(validation)
+      setDiscountCodeInput(validation.code)
     } catch (error) {
       setAppliedDiscount(null)
       setDiscountError(getErrorMessage(error, 'Mã giảm giá không hợp lệ hoặc đã hết hiệu lực.'))
@@ -81,6 +85,8 @@ function CheckoutPage() {
     event.preventDefault()
     setFormError(null)
     setFieldErrors({})
+
+    if (isValidatingDiscount) return
 
     if (items.length === 0) {
       setFormError('Giỏ hàng của bạn đang trống.')
@@ -216,12 +222,18 @@ function CheckoutPage() {
               <section className="checkout-section">
                 <h3 className="checkout-section-title">Mã giảm giá</h3>
 
+                <AvailableDiscounts subtotal={totalAmount} appliedCode={appliedDiscount?.code}
+                  disabled={isValidatingDiscount || isSubmitting} onApply={handleApplyDiscount} />
+
+                <div className="checkout-manual-discount">
+                <label htmlFor="checkout-discount-code">Bạn có mã khác? Nhập mã tại đây</label>
+
                 {appliedDiscount ? (
                   <div className="checkout-discount-applied">
                     <span>
                       Đã áp dụng mã <strong>{appliedDiscount.code}</strong>
                     </span>
-                    <Button type="button" variant="ghost" onClick={handleRemoveDiscount}>
+                    <Button type="button" variant="ghost" onClick={handleRemoveDiscount} disabled={isValidatingDiscount || isSubmitting}>
                       Hủy mã
                     </Button>
                   </div>
@@ -229,22 +241,25 @@ function CheckoutPage() {
                   <div className="checkout-discount-input">
                     <input
                       type="text"
+                      id="checkout-discount-code"
                       placeholder="Nhập mã giảm giá"
                       value={discountCodeInput}
                       onChange={(event) => setDiscountCodeInput(event.target.value)}
+                      onKeyDown={(event) => { if (event.key === 'Enter') { event.preventDefault(); void handleApplyDiscount() } }}
                     />
                     <Button
                       type="button"
                       variant="secondary"
-                      onClick={handleApplyDiscount}
-                      disabled={isValidatingDiscount || !discountCodeInput.trim()}
+                      onClick={() => { void handleApplyDiscount() }}
+                      disabled={isSubmitting || isValidatingDiscount || !discountCodeInput.trim()}
                     >
                       {isValidatingDiscount ? 'Đang kiểm tra...' : 'Áp dụng'}
                     </Button>
                   </div>
                 )}
 
-                {discountError ? <span className="checkout-field-error">{discountError}</span> : null}
+                {discountError ? <span className="checkout-field-error" role="alert">{discountError}</span> : null}
+                </div>
               </section>
             </div>
 
@@ -281,7 +296,7 @@ function CheckoutPage() {
 
               {formError ? <p className="checkout-form-error">{formError}</p> : null}
 
-              <Button type="submit" disabled={isSubmitting} className="checkout-submit">
+              <Button type="submit" disabled={isSubmitting || isValidatingDiscount} className="checkout-submit">
                 {isSubmitting ? 'Đang đặt hàng...' : 'Đặt hàng'}
               </Button>
             </aside>
@@ -292,23 +307,6 @@ function CheckoutPage() {
       <Footer />
     </div>
   )
-}
-
-/**
- * Computes the discount amount in VND for a validated Mã_Giảm_Giá
- * against the cart's subtotal, mirroring the backend's PERCENTAGE/
- * FIXED_AMOUNT handling (Requirement 4.6). The final authoritative
- * amount always comes back from POST /api/orders; this is only used to
- * preview the total before submitting.
- */
-function computeDiscountAmount(discount: DiscountValidationResponse | null, subtotal: number): number {
-  if (!discount) {
-    return 0
-  }
-  if (discount.discountType === 'PERCENTAGE') {
-    return Math.min(subtotal * (discount.discountValue / 100), subtotal)
-  }
-  return Math.min(discount.discountValue, subtotal)
 }
 
 export default CheckoutPage

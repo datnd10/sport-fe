@@ -22,6 +22,8 @@ export interface CreateOrderRequest {
 
 export interface OrderItemResponse {
   id: string
+  productId?: string
+  imagePath?: string | null
   productName: string
   sku: string
   attributes: string
@@ -73,6 +75,7 @@ export interface OrderSummaryResponse {
   accountEmail: string | null
   accountFullName: string | null
   createdAt: string
+  items?: OrderItemResponse[]
 }
 
 /** Request payload for PUT /api/admin/orders/{id}/status (Requirement 5.3, 5.5). */

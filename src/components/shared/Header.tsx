@@ -1,35 +1,35 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { notifySuccess } from '../../services/toast'
 import { useAccountStore } from '../../store/accountStore'
-import { useCartStore } from '../../store/cartStore'
 import Button from './Button'
 import { BallLogoIcon } from './icons'
 import SearchBar from './SearchBar'
 import './Header.css'
 
-// Shared Header/navbar shell used by Storefront pages, laid out Shopee-style:
-// logo on the far left, the keyword SearchBar taking up the middle
-// (Requirement 2.3), and on the right either "Đăng nhập"/"Đăng ký" buttons
-// for guests, or the Giỏ_Hàng (Cart) indicator + current Tài_Khoản's info
-// (name + logout) once authenticated. Danh_Mục browsing still happens via
-// the homepage's category list/links (Requirement 2.2) — this is only the
-// cross-category keyword search (Requirement 2.3).
-//
-// The cart indicator links to the Giỏ_Hàng page (task 26.1) and shows
-// itemCount from cartStore. It is only shown to authenticated accounts:
-// guests can still build up a local cart (Requirement 3.6), but the
-// indicator itself is reserved for signed-in Khách_Hàng to avoid implying
-// a persistent cart before there is an account to attach it to.
-// Requirements: 3.1, 6.1, 6.2, 6.5, 11.1, 11.2, 11.3
-function Header() {
+function Header({ showSearch = false }: { showSearch?: boolean }) {
   const navigate = useNavigate()
   const location = useLocation()
   const [searchParams] = useSearchParams()
   const isAuthenticated = useAccountStore((state) => state.isAuthenticated)
   const account = useAccountStore((state) => state.account)
   const logout = useAccountStore((state) => state.logout)
-  const itemCount = useCartStore((state) => state.itemCount)
+  const dropdown = useRef<HTMLDetailsElement>(null)
+  useEffect(() => {
+    function outside(event: PointerEvent) {
+      if (dropdown.current && !dropdown.current.contains(event.target as Node)) dropdown.current.open = false
+    }
+    function escape(event: KeyboardEvent) {
+      if (event.key === 'Escape' && dropdown.current?.open) {
+        dropdown.current.open = false
+        dropdown.current.querySelector('summary')?.focus()
+      }
+    }
+    document.addEventListener('pointerdown', outside)
+    document.addEventListener('keydown', escape)
+    return () => { document.removeEventListener('pointerdown', outside); document.removeEventListener('keydown', escape) }
+  }, [])
+  function closeDropdown() { if (dropdown.current) dropdown.current.open = false }
 
   // Only pre-fill the header search box from the URL on the search page
   // itself; other pages (e.g. a Danh_Mục page with its own "categoryId"
@@ -42,6 +42,7 @@ function Header() {
   }, [location.pathname, searchParams])
 
   function handleLogout() {
+    closeDropdown()
     logout()
     notifySuccess('Đã đăng xuất.')
     navigate('/')
@@ -61,43 +62,29 @@ function Header() {
           </Link>
         </h1>
 
-        <SearchBar
+        {showSearch ? <SearchBar
           key={initialKeyword}
           initialKeyword={initialKeyword}
           onSearch={handleSearch}
           className="app-header-search"
-        />
+        /> : null}
 
         <div className="app-header-actions">
           {isAuthenticated ? (
-            <Link to="/cart" className="app-header-cart" aria-label={`Giỏ hàng: ${itemCount} sản phẩm`}>
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path
-                  d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.6h7.4a2 2 0 0 0 2-1.6L21 7H6"
-                  stroke="currentColor"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <circle cx="9" cy="20" r="1.3" fill="currentColor" />
-                <circle cx="17" cy="20" r="1.3" fill="currentColor" />
-              </svg>
-              {itemCount > 0 ? <span className="app-header-cart-badge">{itemCount}</span> : null}
-            </Link>
-          ) : null}
-
-          {isAuthenticated ? (
-            <div className="app-header-account">
-              <Link to="/account/profile" className="app-header-account-name">
-                {account?.fullName ?? account?.email ?? 'Tài khoản'}
-              </Link>
-              <Link to="/account/orders" className="app-header-account-orders">
-                Đơn hàng của tôi
-              </Link>
-              <Button variant="ghost" className="app-header-logout" onClick={handleLogout}>
-                Đăng xuất
-              </Button>
-            </div>
+            <details className="account-dropdown" ref={dropdown}>
+              <summary className="account-dropdown-trigger">
+                <span className="account-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.3" stroke="currentColor" strokeWidth="1.6" /><path d="M5 20v-1a7 7 0 0 1 14 0v1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" /></svg></span>
+                <span className="account-greeting">Xin chào, <strong>{account?.fullName || account?.email || 'bạn'}</strong></span>
+                <svg className="account-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 8 5 5 5-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </summary>
+              <nav className="account-dropdown-panel" aria-label="Tài khoản">
+                <Link to="/cart" onClick={closeDropdown}>Giỏ hàng</Link>
+                <Link to="/account/orders" onClick={closeDropdown}>Đơn hàng của tôi</Link>
+                <Link to="/account/profile" onClick={closeDropdown}>Chỉnh sửa thông tin</Link>
+                {account?.role === 'ADMIN' ? <Link to="/admin" onClick={closeDropdown}>Quản trị cửa hàng</Link> : null}
+                <button type="button" onClick={handleLogout}>Đăng xuất</button>
+              </nav>
+            </details>
           ) : (
             <div className="app-header-auth-actions">
               <Link to="/login">

@@ -7,7 +7,20 @@
  * only meaningful for the Admin list (GET /api/products/{id}/reviews only
  * ever returns non-hidden reviews, so `hidden` is always `false` there).
  */
+export interface ReviewImageResponse {
+  id: string
+  filePath: string
+  displayOrder: number
+}
+
+export interface ReviewEligibility {
+  orderItemId: string
+  orderCode: string
+  attributes: string
+}
+
 export interface ReviewResponse {
+  images?: ReviewImageResponse[]
   id: string
   productId: string
   productName: string

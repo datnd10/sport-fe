@@ -6,6 +6,7 @@ import reviewService from '../../services/reviewService'
 import type { ReviewResponse } from '../../services/reviewService.types'
 import { notifySuccess } from '../../services/toast'
 import AdminLayout from './AdminLayout'
+import ReviewImages from '../../components/reviews/ReviewImages'
 import '../../components/shared/SearchInput.css'
 import './AdminForms.css'
 
@@ -158,7 +159,7 @@ function AdminReviewPage() {
                       <td>{review.productName}</td>
                       <td>{review.reviewerName ?? 'Khách hàng'}</td>
                       <td>{review.rating} / 5</td>
-                      <td>{review.comment ?? '—'}</td>
+                      <td>{review.comment ?? '—'}<ReviewImages images={review.images} /></td>
                       <td>{formatDateTime(review.createdAt)}</td>
                       <td>
                         <Badge variant={review.hidden ? 'error' : 'brand'}>

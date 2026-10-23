@@ -8,7 +8,7 @@ import { useAccountStore } from '../../store/accountStore'
 import './AuthForm.css'
 
 interface LocationState {
-  from?: { pathname: string }
+  from?: { pathname: string; search?: string; hash?: string }
 }
 
 // Đăng nhập (Login) page. On success, stores the session via the account
@@ -45,7 +45,9 @@ function LoginPage() {
       }
 
       const state = location.state as LocationState | null
-      const redirectTo = state?.from?.pathname ?? '/'
+      const from = state?.from
+      const redirectTo = from?.pathname?.startsWith('/') && !from.pathname.startsWith('//')
+        ? `${from.pathname}${from.search ?? ''}${from.hash ?? ''}` : '/'
       navigate(redirectTo, { replace: true })
     } catch (error) {
       // Deliberately generic: do not reveal whether the email or the

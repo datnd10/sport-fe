@@ -5,6 +5,8 @@ import type {
   DashboardRange,
   DashboardSummaryResponse,
   TopProductResponse,
+  DashboardOverview,
+  OverviewRange,
 } from './dashboardService.types'
 
 // API client for the Admin Dashboard overview page (design.md — "Module
@@ -60,6 +62,10 @@ async function getRevenueByCategory(range: DashboardRange): Promise<CategoryReve
 }
 
 export const dashboardService = {
+  async getOverview(params: { range: OverviewRange; from?: string; to?: string }): Promise<DashboardOverview> {
+    const response = await apiClient.get<DashboardOverview>(`${ADMIN_DASHBOARD_BASE}/overview`, { params })
+    return response.data
+  },
   getSummary,
   getTopProducts,
   getRevenueByDay,

@@ -50,6 +50,7 @@ export interface StockAdjustmentRequest {
  * or the related Sản_Phẩm's name.
  */
 export interface AdminInventoryListParams {
+  stockStatus?: StockStatus
   page?: number
   size?: number
   keyword?: string

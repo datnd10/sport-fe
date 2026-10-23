@@ -1,0 +1,38 @@
+.review-photos { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .85rem; }
+.review-photos button { width: 76px; height: 76px; padding: 0; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-bg-muted); overflow: hidden; cursor: zoom-in; }
+.review-photos img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.review-photos button:hover { border-color: var(--color-brand-primary); }
+.review-lightbox { width: min(900px, 94vw); max-width: 94vw; max-height: 94dvh; padding: 0; border: 0; border-radius: 12px; color: white; background: #17201a; overflow: auto; }
+.review-lightbox::backdrop { background: rgb(0 0 0 / 78%); }
+.review-lightbox-content { padding: 3.25rem 1rem 1rem; position: relative; }
+.review-lightbox-content > img { display: block; width: 100%; max-height: 68dvh; object-fit: contain; }
+.review-lightbox-close { position: absolute; top: .5rem; right: .6rem; width: 36px; height: 36px; border: 0; border-radius: 50%; background: #fff; color: #17201a; font-size: 1.5rem; cursor: pointer; }
+.review-lightbox-controls { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+.review-lightbox-controls button { width: 38px; height: 38px; border: 1px solid #77817b; background: transparent; color: white; border-radius: 50%; font-size: 1.5rem; cursor: pointer; }
+.review-lightbox-controls button:disabled { opacity: .4; cursor: default; }
+.review-composer { border: 1px solid var(--color-border); border-radius: 10px; background: #fafcfb; padding: 1.25rem; }
+.review-composer form { display: flex; flex-direction: column; gap: .65rem; }
+.review-composer h4 { margin: 0 0 .4rem; color: var(--color-text-heading); font-size: 1rem; }
+.review-composer label, .review-composer legend { color: var(--color-text-body); font-size: .85rem; font-weight: 600; }
+.review-composer textarea, .review-composer select { padding: .7rem; font: inherit; font-size: .9rem; border: 1px solid var(--color-border-strong); border-radius: 6px; background: white; color: var(--color-text-body); width: 100%; box-sizing: border-box; }
+.review-composer textarea { resize: vertical; }
+.review-composer input[type="file"] { max-width: 100%; font: inherit; font-size: .85rem; }
+.review-composer input[type="file"]::file-selector-button { padding: .6rem .85rem; background: white; border: 1px solid var(--color-border-strong); border-radius: 6px; color: var(--color-brand-primary); cursor: pointer; margin-right: .6rem; }
+.review-composer form > button[type="submit"] { align-self: flex-start; margin-top: .4rem; }
+.review-composer-hint, .review-upload-hint { color: var(--color-text-muted); font-size: .85rem; line-height: 1.7; margin: 0; }
+.review-composer-hint a { color: var(--color-brand-primary); }
+.review-upload-hint { font-size: .75rem; }
+.review-stars-input { border: 0; padding: .3rem 0 .5rem; margin: .4rem 0; display: flex; align-items: center; gap: .25rem; }
+.review-stars-input label { position: relative; cursor: pointer; }
+.review-stars-input input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.review-stars-input label span { font-size: 1.9rem; color: #cad1cc; }
+.review-stars-input label .selected { color: #a66c00; }
+.review-stars-input input:focus-visible + span { outline: 2px solid var(--color-brand-primary); outline-offset: 2px; }
+.review-stars-input > span { font-size: .8rem; color: var(--color-text-muted); margin-left: .65rem; }
+.review-file-previews { display: flex; flex-wrap: wrap; gap: .75rem; }
+.review-file-previews > div { position: relative; width: 90px; height: 90px; }
+.review-file-previews img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid var(--color-border); }
+.review-file-previews button { position: absolute; right: -6px; top: -6px; width: 25px; height: 25px; border: 1px solid var(--color-border-strong); border-radius: 50%; background: #fff; cursor: pointer; color: var(--color-state-error); }
+.review-form-error { margin: .4rem 0; color: var(--color-state-error); font-size: .85rem; }
+.review-form-success { color: var(--color-brand-primary); font-size: .9rem; margin: 0 0 .75rem; }
+@media (max-width: 500px) { .review-composer { padding: 1rem; } .review-photos button { width: 64px; height: 64px; } }

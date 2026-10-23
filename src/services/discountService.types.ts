@@ -3,6 +3,14 @@
 
 export type DiscountType = 'PERCENTAGE' | 'FIXED_AMOUNT'
 
+export interface AvailableDiscountResponse {
+  id: string
+  code: string
+  discountType: DiscountType
+  discountValue: number
+  validTo: string
+}
+
 /**
  * Returned by GET /api/discount-codes/validate when a Mã_Giảm_Giá is
  * currently eligible to be applied to an order. Ineligible codes result

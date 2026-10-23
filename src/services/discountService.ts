@@ -2,6 +2,7 @@ import { apiClient } from './apiClient'
 import type { PageResponse } from './common.types'
 import type {
   AdminDiscountListParams,
+  AvailableDiscountResponse,
   DiscountCodeCreateRequest,
   DiscountCodeResponse,
   DiscountValidationResponse,
@@ -63,6 +64,10 @@ async function deactivateDiscountCode(id: string): Promise<DiscountCodeResponse>
 }
 
 export const discountService = {
+  async getAvailableCodes(): Promise<AvailableDiscountResponse[]> {
+    const response = await apiClient.get<AvailableDiscountResponse[]>('/discount-codes/available')
+    return response.data
+  },
   validateCode,
   getAllDiscountCodes,
   createDiscountCode,
